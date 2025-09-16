@@ -16,9 +16,15 @@ unzip remote.zip && rm remote.zip
 mkdir  ~/.config
 sudo mv -f nvim-remote ~/.config/nvim
 
+if [ "$BOOTSTRAP_ONLY_ONCE_ACTION_EXECUTED" = "true" ]; then
+    echo "Make fish default"
+    echo "fish" >> ~/.bashrc
+
+
+    echo "export BOOTSTRAP_ONLY_ONCE_ACTION_EXECUTED = true" >> ~/.bashrc
+fi
 
 echo "Install minikube"
-
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-arm64
 sudo install minikube-linux-arm64 /usr/local/bin/minikube && rm minikube-linux-arm64
 

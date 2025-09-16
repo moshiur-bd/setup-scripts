@@ -17,12 +17,9 @@ mkdir  ~/.config
 sudo mv -f nvim-remote ~/.config/nvim
 sudo rm -rf nvim-remote #in case the above command fails due to pre-existing config
 
-if [ "$BOOTSTRAP_ONLY_ONCE_ACTION_EXECUTED" = "true" ]; then
+if ! grep -q 'fish' ~/.bashrc; then
     echo "Make fish default"
     echo "fish" >> ~/.bashrc
-
-
-    echo "export BOOTSTRAP_ONLY_ONCE_ACTION_EXECUTED = true" >> ~/.bashrc
 fi
 
 echo "Install minikube"

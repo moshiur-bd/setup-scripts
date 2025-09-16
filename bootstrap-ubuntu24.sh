@@ -15,6 +15,7 @@ curl -LO https://github.com/moshiur-bd/nvim/archive/refs/heads/remote.zip
 unzip remote.zip && rm remote.zip
 mkdir  ~/.config
 sudo mv -f nvim-remote ~/.config/nvim
+sudo rm -rf nvim-remote #in case the above command fails due to pre-existing config
 
 if [ "$BOOTSTRAP_ONLY_ONCE_ACTION_EXECUTED" = "true" ]; then
     echo "Make fish default"

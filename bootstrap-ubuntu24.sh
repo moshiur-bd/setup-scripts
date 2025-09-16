@@ -13,6 +13,7 @@ sudo apt -y install neovim
 echo "Setup neovim scripts"
 curl -LO https://github.com/moshiur-bd/nvim/archive/refs/heads/remote.zip
 unzip remote.zip && rm remote.zip
+mkdir  ~/.config
 sudo mv -f nvim-remote ~/.config/nvim
 
 

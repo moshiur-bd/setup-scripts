@@ -25,16 +25,20 @@ if ! grep -q 'fish' ~/.bashrc; then
     echo "fish" >> ~/.bashrc
 fi
 
-echo "Setup Docker"
-sudo apt -y install docker.io
 
-echo "Install minikube X64"
-curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
-
-
-echo "Install kubectl"
-snap install kubectl --classic
 
 echo "Start kubernetes"
-minikube start --force
+sudo snap install microk8s --classic
+microk8s status --wait-ready
+alias kubectl="microk8s kubectl"
+
+
+echo "Setup argocd"
+kubectl create namespace argocd
+kubectl create namespace apps
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+kubectl get svc -n argocd
+
+

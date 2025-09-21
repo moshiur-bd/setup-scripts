@@ -26,11 +26,11 @@ if ! grep -q 'fish' ~/.bashrc; then
 fi
 
 
-
 echo "Start kubernetes"
 sudo snap install microk8s --classic
 microk8s status --wait-ready
 alias kubectl="microk8s kubectl"
+echo 'alias kubectl="microk8s kubectl"'>> ~/.bashrc
 
 
 echo "Setup argocd"
@@ -38,7 +38,6 @@ kubectl create namespace argocd
 kubectl create namespace apps
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
-kubectl get svc -n argocd
+echo "Now expose to internet using other scripts if necessary!!!"
 
-
+. ~/.bashrc
